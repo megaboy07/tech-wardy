@@ -1,0 +1,50 @@
+/* ============================================================
+   قسم الرسالة
+   ============================================================ */
+
+.mission-section {
+    padding: 75px 7%;
+    background: linear-gradient(135deg, #a92f61, #d94f83);
+    color: white;
+    text-align: center;
+}
+
+.mission-content {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.mission-heart {
+    display: block;
+    margin-bottom: 14px;
+    color: #ffe1ec;
+    font-size: 35px;
+}
+
+.mission-section .section-eyebrow {
+    color: #ffe1ec;
+}
+
+.mission-content h2 {
+    margin: 10px 0 14px;
+    color: white;
+    font-size: clamp(27px, 3vw, 36px);
+    line-height: 1.4;
+}
+
+.mission-content p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.93);
+    font-size: 16px;
+    line-height: 2;
+}
+
+@media (max-width: 600px) {
+    .mission-section {
+        padding: 55px 22px;
+    }
+
+    .mission-content p {
+        font-size: 14px;
+    }
+}
