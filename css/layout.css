@@ -1,110 +1,110 @@
-/* ========== Header ========== */
+/* ============================================================
+   Site Header — Glassmorphism
+   ============================================================ */
 
 .site-header {
-    background-color: var(--white);
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    background: rgba(255, 255, 255, 0.78);
+    border-bottom: 1px solid rgba(217, 79, 131, 0.12);
+    box-shadow: 0 6px 24px rgba(100, 30, 60, 0.045);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 }
 
-.navbar {
+.top-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
-    padding: 18px 8%;
+    gap: 16px;
     flex-wrap: wrap;
+
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 5%;
 }
 
 .logo {
     color: var(--dark-pink);
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 22px;
+    font-weight: 800;
     white-space: nowrap;
+    padding: 4px 0;
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* زر القائمة على الجوال */
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    background: none;
-    border: none;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
+/* ============================================================
+   Horizontal Nav Links
+   ============================================================ */
 
-.menu-toggle:hover {
-    background: var(--light-pink);
-    transform: none;
-    box-shadow: none;
-}
-
-.menu-toggle span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: var(--dark-pink);
-    border-radius: 2px;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.menu-toggle[aria-expanded="true"] span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-}
-.menu-toggle[aria-expanded="true"] span:nth-child(2) {
-    opacity: 0;
-}
-.menu-toggle[aria-expanded="true"] span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-}
-
-/* القائمة */
 .nav-links {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 24px;
+    gap: 6px;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 40px;
+    padding: 8px 14px;
+
+    border-radius: 999px;
+    color: var(--dark-pink);
     font-size: 14px;
-    transition: color 0.3s ease;
-    position: relative;
+    font-weight: 600;
+    white-space: nowrap;
+
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease,
+                color 0.2s ease,
+                transform 0.15s ease;
 }
 
-.nav-links a:hover {
-    color: var(--pink);
+@media (hover: hover) {
+    .nav-links a:hover {
+        background-color: rgba(217, 79, 131, 0.10);
+        color: var(--pink);
+    }
 }
 
-.nav-links a.is-active {
-    color: var(--pink);
-    font-weight: bold;
+.nav-links a:active {
+    transform: scale(0.96);
 }
 
-.nav-links a.is-active::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: -6px;
-    width: 100%;
-    height: 2px;
+.nav-links a.is-active,
+.nav-links a[aria-current="page"] {
     background-color: var(--pink);
-    border-radius: 2px;
+    color: var(--white);
+    font-weight: 700;
 }
 
-/* ========== Sections ========== */
+@media (hover: hover) {
+    .nav-links a.is-active:hover,
+    .nav-links a[aria-current="page"]:hover {
+        background-color: var(--dark-pink);
+        color: var(--white);
+    }
+}
+
+/* ============================================================
+   Sections + Page Header
+   ============================================================ */
 
 section {
     padding: 70px 8%;
-    scroll-margin-top: 90px;
+    scroll-margin-top: 100px;
 }
 
 section h2 {
@@ -118,7 +118,6 @@ section > p {
     max-width: 700px;
 }
 
-/* رأس الصفحة الداخلية */
 .page-header {
     text-align: center;
     padding: 60px 8% 0;
@@ -138,7 +137,9 @@ section > p {
     font-size: 17px;
 }
 
-/* ========== Footer ========== */
+/* ============================================================
+   Footer
+   ============================================================ */
 
 .site-footer {
     text-align: center;
@@ -161,56 +162,62 @@ section > p {
     margin: 0;
 }
 
-/* ========== Responsive ========== */
+/* ============================================================
+   Responsive
+   ============================================================ */
 
-@media (max-width: 768px) {
-    .navbar {
-        padding: 15px 5%;
-    }
-
-    .menu-toggle {
-        display: flex;
+@media (max-width: 900px) {
+    .top-nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 5%;
     }
 
     .nav-links {
-        display: none;
-        flex-basis: 100%;
-        flex-direction: column;
-        align-items: flex-start;
+        justify-content: center;
         gap: 4px;
-        padding-top: 16px;
-        margin-top: 16px;
-        border-top: 1px solid #f5d5e2;
-    }
-
-    .nav-links.is-open {
-        display: flex;
-    }
-
-    .nav-links li {
-        width: 100%;
-    }
-
-    .nav-links a {
-        display: block;
-        padding: 10px 0;
-        font-size: 16px;
-    }
-
-    .nav-links a.is-active::after {
-        display: none;
-    }
-
-    .nav-links a.is-active {
-        border-right: 3px solid var(--pink);
-        padding-right: 10px;
     }
 
     section {
-        padding: 45px 6%;
+        padding: 55px 6%;
+        scroll-margin-top: 150px;
     }
 
     .page-header {
         padding: 40px 6% 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .top-nav {
+        padding: 12px 4%;
+        gap: 10px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .nav-links {
+        gap: 3px;
+    }
+
+    .nav-links a {
+        min-height: 36px;
+        padding: 7px 11px;
+        font-size: 13px;
+    }
+
+    section {
+        padding: 45px 6%;
+        scroll-margin-top: 160px;
+    }
+}
+
+@media (max-width: 380px) {
+    .nav-links a {
+        padding: 6px 9px;
+        font-size: 12px;
     }
 }
