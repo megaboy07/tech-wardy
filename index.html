@@ -24,7 +24,9 @@
     <link rel="stylesheet" href="css/features/hero.css">
     <link rel="stylesheet" href="css/features/countdown.css">
     <link rel="stylesheet" href="css/features/explore.css">
+    <link rel="stylesheet" href="css/features/mission.css">
     <link rel="stylesheet" href="css/features/impact.css">
+    <link rel="stylesheet" href="css/features/event.css">
     <link rel="stylesheet" href="css/features/share.css">
     <link rel="stylesheet" href="css/utilities.css">
 </head>
@@ -38,43 +40,68 @@
         </p>
     </noscript>
 
-<header class="site-header">
-    <nav class="navbar" aria-label="القائمة الرئيسية">
-        <a href="index.html" class="logo">تِك وردي 💗</a>
+    <header class="site-header">
+        <nav class="top-nav" aria-label="القائمة الرئيسية">
+            <a href="index.html" class="logo">تِك وردي 💗</a>
 
-        <button
-            class="menu-toggle"
-            type="button"
-            aria-label="فتح القائمة"
-            aria-expanded="false"
-            aria-controls="main-navigation"
-        >
-            <span></span><span></span><span></span>
-        </button>
-
-        <ul class="nav-links" id="main-navigation">
-            <li><a href="index.html" data-nav="home">الرئيسية</a></li>
-            <li><a href="wall.html" data-nav="wall">حائط الأمل</a></li>
-            <li><a href="quiz.html" data-nav="quiz">تحدي الوعي</a></li>
-            <li><a href="learn.html" data-nav="learn">اعرف أكثر</a></li>
-            <li><a href="videos.html" data-nav="videos">فيديوهات</a></li>
-        </ul>
-    </nav>
-</header>
+            <ul class="nav-links">
+                <li><a href="index.html" data-nav="home">الرئيسية</a></li>
+                <li><a href="wall.html" data-nav="wall">حائط الأمل</a></li>
+                <li><a href="quiz.html" data-nav="quiz">تحدي الوعي</a></li>
+                <li><a href="learn.html" data-nav="learn">اعرف أكثر</a></li>
+                <li><a href="videos.html" data-nav="videos">فيديوهات</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <main>
 
-        <!-- الواجهة الرئيسية -->
-        <section id="home">
-            <p>TECH WARDI | تِك وردي</p>
-            <h1>كل رسالة دعم تصنع فرقًا 💗</h1>
-            <p>
-                كل معلومة تزيد الوعي، وكل كلمة أمل
-                قد تصنع فرقًا في حياة شخص آخر.
-            </p>
+        <!-- Hero -->
+        <section id="home" class="hero">
 
-            <a href="wall.html">اكتب رسالة أمل</a>
-            <a href="quiz.html">ابدأ تحدي الوعي</a>
+            <div class="hero-content">
+                <span class="hero-label">TECH WARDI | تِك وردي</span>
+
+                <h1>
+                    بالتكنولوجيا ننشر الوعي،
+                    <span>وبالمعرفة نصنع الأمل.</span>
+                </h1>
+
+                <p class="hero-description">
+                    مساحة تجمع علوم الحاسوب لتقديم المعرفة الصحية
+                    بأساليب رقمية تفاعلية، والمساهمة في نشر الوعي بسرطان
+                    الثدي وأهمية الكشف المبكر والدعم الإنساني.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="wall.html" class="button button-primary">شارك رسالة أمل 💗</a>
+                    <a href="quiz.html" class="button button-secondary">اكتشف مستوى وعيك</a>
+                </div>
+
+                <p class="hero-note">
+                    <span aria-hidden="true">♥</span>
+                    الوعي معرفة، والدعم إنسانية، والأمل يستحق أن يُشارك.
+                </p>
+            </div>
+
+            <div class="hero-art" aria-hidden="true">
+                <div class="art-circle circle-one"></div>
+                <div class="art-circle circle-two"></div>
+
+                <!-- إن لم تكن الصورة موجودة، استبدل <img> بـ: <span class="art-heart-emoji">💗</span> -->
+                <img src="images/heart-new.png" alt="" class="art-heart" loading="lazy">
+
+                <div class="art-card art-card-top">
+                    <span>💗</span>
+                    <p>كلمة أمل</p>
+                </div>
+
+                <div class="art-card art-card-bottom">
+                    <span>🎗️</span>
+                    <p>وعي يصنع فرقًا</p>
+                </div>
+            </div>
+
         </section>
 
         <!-- العدّاد التنازلي -->
@@ -142,16 +169,31 @@
             </div>
         </section>
 
+        <!-- قسم الرسالة -->
+        <section id="mission" class="mission-section">
+            <div class="mission-content">
+                <span class="mission-heart" aria-hidden="true">♥</span>
+                <span class="section-eyebrow">رسالتنا</span>
+                <h2>معًا من أجل وعي أكبر وأمل أقرب</h2>
+                <p>
+                    مبادرة طلابية تجمع المعرفة الصحية والإبداع التقني
+                    لنشر الوعي بسرطان الثدي وتعزيز ثقافة الدعم والكشف المبكر.
+                </p>
+            </div>
+        </section>
+
         <!-- عداد الأثر -->
         <section id="impact">
             <h2>أثرنا معًا</h2>
 
             <div class="impact-card">
+                <span class="impact-icon" aria-hidden="true">👥</span>
                 <h3 id="quiz-count">0</h3>
                 <p>مشاركة في الاختبار</p>
             </div>
 
             <div class="impact-card">
+                <span class="impact-icon" aria-hidden="true">💌</span>
                 <h3 id="messages-count">0</h3>
                 <p>رسالة معتمدة</p>
             </div>
@@ -159,12 +201,37 @@
 
         <!-- عن الفعالية -->
         <section id="event">
-            <h2>عن الفعالية</h2>
+            <div class="section-heading">
+                <span class="section-eyebrow">عن المبادرة</span>
+                <h2>تِك وردي في جامعة بحري</h2>
+                <p>نعمل معًا على تحويل المعرفة إلى تجربة توعوية تجمع التعلم والتفاعل والمشاركة.</p>
+            </div>
 
-            <p>فعالية تِك وردي للتوعية بسرطان الثدي.</p>
-            <p>الموعد: الثلاثاء 20 أكتوبر 2026.</p>
-            <p>المكان: جامعة بحري، سيتم تأكيده من اللجنة.</p>
-            <p>بالتعاون بين طلاب كلية علوم الحاسوب وطلاب كلية التمريض.</p>
+            <div class="event-details">
+                <div class="event-detail">
+                    <span aria-hidden="true">🏛️</span>
+                    <div>
+                        <h3>الجهة المنظمة</h3>
+                        <p>طلاب علوم الحاسوب بالتعاون مع طلاب كلية التمريض.</p>
+                    </div>
+                </div>
+
+                <div class="event-detail">
+                    <span aria-hidden="true">📅</span>
+                    <div>
+                        <h3>موعد الفعالية</h3>
+                        <p>الثلاثاء، 20 أكتوبر 2026.</p>
+                    </div>
+                </div>
+
+                <div class="event-detail">
+                    <span aria-hidden="true">📍</span>
+                    <div>
+                        <h3>المكان</h3>
+                        <p>جامعة بحري — يُؤكَّد الموقع قبل الفعالية.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- شارك الموقع -->
