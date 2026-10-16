@@ -1,0 +1,43 @@
+#share {
+    text-align: center;
+    background: linear-gradient(135deg, #fff0f5, #ffe0eb);
+}
+
+#share h2 { margin-bottom: 12px; }
+
+#share > p {
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto 24px;
+}
+
+.share-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+#share .btn-secondary {
+    background-color: var(--white);
+    color: var(--dark-pink);
+    border: 2px solid var(--pink);
+}
+
+#share .btn-secondary:hover {
+    background-color: var(--light-pink);
+    color: var(--dark-pink);
+}
+
+#share-status {
+    color: var(--ok);
+    font-weight: bold;
+    min-height: 1.5em;
+    margin: 0;
+}
+
+@media (max-width: 480px) {
+    .share-actions { flex-direction: column; }
+    .share-actions button { width: 100%; }
+}
