@@ -1,18 +1,20 @@
-header {
+/* ========== Header ========== */
+
+.site-header {
     background-color: var(--white);
-    padding: 18px 8%;
     position: sticky;
     top: 0;
     z-index: 100;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
-nav {
+.navbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
-    position: relative;
+    padding: 18px 8%;
+    flex-wrap: wrap;
 }
 
 .logo {
@@ -22,19 +24,83 @@ nav {
     white-space: nowrap;
 }
 
-nav ul {
+/* زر القائمة على الجوال */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.menu-toggle:hover {
+    background: var(--light-pink);
+    transform: none;
+    box-shadow: none;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--dark-pink);
+    border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* القائمة */
+.nav-links {
     display: flex;
     align-items: center;
     gap: 24px;
     list-style: none;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
 }
 
-nav ul a { font-size: 14px; transition: color 0.3s ease; }
-nav ul a:hover { color: var(--pink); }
+.nav-links a {
+    font-size: 14px;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: var(--pink);
+}
+
+.nav-links a.is-active {
+    color: var(--pink);
+    font-weight: bold;
+}
+
+.nav-links a.is-active::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--pink);
+    border-radius: 2px;
+}
+
+/* ========== Sections ========== */
 
 section {
     padding: 70px 8%;
@@ -47,9 +113,34 @@ section h2 {
     margin-bottom: 18px;
 }
 
-section > p { color: var(--muted); max-width: 700px; }
+section > p {
+    color: var(--muted);
+    max-width: 700px;
+}
 
-footer {
+/* رأس الصفحة الداخلية */
+.page-header {
+    text-align: center;
+    padding: 60px 8% 0;
+    background: linear-gradient(135deg, #fff0f5, #ffffff);
+}
+
+.page-header h1 {
+    font-size: clamp(28px, 4.5vw, 42px);
+    color: #7c2449;
+    margin-bottom: 12px;
+}
+
+.page-header p {
+    color: var(--muted);
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 17px;
+}
+
+/* ========== Footer ========== */
+
+.site-footer {
     text-align: center;
     padding: 40px 8% 30px;
     color: var(--muted);
@@ -64,33 +155,62 @@ footer {
     margin-bottom: 10px;
 }
 
-.footer-contact {
-    margin-bottom: 10px;
-}
-
-.footer-contact a {
-    color: var(--dark-pink);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-}
-
-.footer-contact a:hover { color: var(--pink); }
-
 .footer-copy {
     font-size: 13px;
     color: var(--muted);
     margin: 0;
 }
 
+/* ========== Responsive ========== */
+
 @media (max-width: 768px) {
-    header { padding: 15px 5%; }
-    nav { flex-direction: column; }
-    nav ul {
-        position: static;
-        transform: none;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 12px 18px;
+    .navbar {
+        padding: 15px 5%;
     }
-    section { padding: 45px 6%; }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-basis: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding-top: 16px;
+        margin-top: 16px;
+        border-top: 1px solid #f5d5e2;
+    }
+
+    .nav-links.is-open {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 10px 0;
+        font-size: 16px;
+    }
+
+    .nav-links a.is-active::after {
+        display: none;
+    }
+
+    .nav-links a.is-active {
+        border-right: 3px solid var(--pink);
+        padding-right: 10px;
+    }
+
+    section {
+        padding: 45px 6%;
+    }
+
+    .page-header {
+        padding: 40px 6% 0;
+    }
 }
