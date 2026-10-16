@@ -3,6 +3,8 @@
     flex-wrap: wrap;
     gap: 16px;
     justify-content: center;
+    text-align: center;
+    background: #fff7fa;
 }
 
 #impact h2 {
@@ -26,11 +28,23 @@
     box-shadow: var(--shadow-md);
 }
 
+.impact-icon {
+    display: block;
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
 .impact-card h3 {
     color: var(--pink);
     font-size: 36px;
     line-height: 1;
     margin-bottom: 8px;
+}
+
+.impact-card p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 14px;
 }
 
 @media (hover: none) {

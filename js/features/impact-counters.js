@@ -6,7 +6,6 @@
 import { $, setText } from "../core/dom.js";
 import { supabase } from "../core/supabase.js";
 
-const TAG = "[techwardi:counters]";
 const ui = {};
 
 export function initCounters() {
@@ -14,18 +13,15 @@ export function initCounters() {
     ui.messages = $("#messages-count");
 
     if (!ui.quiz && !ui.messages) {
-        console.warn(`${TAG} لا عناصر عدّادات في الصفحة`);
+        console.warn("[counters] لا عناصر عدّادات في الصفحة");
         return;
     }
 
-    // حالة تحميل أولية
     if (ui.quiz) ui.quiz.textContent = "…";
     if (ui.messages) ui.messages.textContent = "…";
 
     refreshQuizCount();
     refreshMessagesCount();
-
-    console.info(`${TAG} جاهزة`);
 }
 
 export async function refreshQuizCount() {
@@ -40,7 +36,7 @@ export async function refreshQuizCount() {
 
         setText(ui.quiz, count ?? 0);
     } catch (error) {
-        console.warn(`${TAG} تعذر تحديث عدّاد الاختبار:`, error);
+        console.warn("[counters] تعذر تحديث عدّاد الاختبار:", error);
     }
 }
 
@@ -57,6 +53,6 @@ export async function refreshMessagesCount() {
 
         setText(ui.messages, count ?? 0);
     } catch (error) {
-        console.warn(`${TAG} تعذر تحديث عدّاد الرسائل:`, error);
+        console.warn("[counters] تعذر تحديث عدّاد الرسائل:", error);
     }
 }

@@ -7,7 +7,6 @@ import { supabase } from "../core/supabase.js";
 import { MESSAGES } from "../config.js";
 import { refreshMessagesCount } from "./impact-counters.js";
 
-const TAG = "[techwardi:wall]";
 const ui = {};
 let refreshTimer = null;
 
@@ -17,7 +16,7 @@ export function initHopeWall() {
     ui.list = $("#messages-list");
 
     if (!ui.form || !ui.input || !ui.list) {
-        console.warn(`${TAG} عناصر DOM ناقصة`);
+        console.warn("[wall] عناصر DOM ناقصة");
         return;
     }
 
@@ -28,8 +27,6 @@ export function initHopeWall() {
 
     loadApprovedMessages();
     startAutoRefresh();
-
-    console.info(`${TAG} جاهزة`);
 }
 
 async function onSubmit(event) {
@@ -43,7 +40,7 @@ async function onSubmit(event) {
 
     const submitBtn = ui.form.querySelector('button[type="submit"]');
     if (!submitBtn) {
-        console.error(`${TAG} زر الإرسال غير موجود`);
+        console.error("[wall] زر الإرسال غير موجود");
         return;
     }
 
@@ -60,13 +57,12 @@ async function onSubmit(event) {
         ui.form.reset();
         setStatus("وصلت رسالتك، ستظهر بعد المراجعة 💗", "ok");
 
-        // قد يعتمد المشرف الرسالة خلال ثوانٍ — ننعش العرض قريبًا
         setTimeout(() => {
             loadApprovedMessages();
             refreshMessagesCount();
         }, 5_000);
     } catch (error) {
-        console.error(`${TAG} فشل الإرسال:`, error);
+        console.error("[wall] فشل الإرسال:", error);
         setStatus("تعذر الإرسال. حاول مجددًا.", "error");
     } finally {
         submitBtn.disabled = false;
@@ -98,7 +94,7 @@ async function loadApprovedMessages() {
             ui.list.append(buildCard(item));
         }
     } catch (error) {
-        console.error(`${TAG} فشل التحميل:`, error);
+        console.error("[wall] فشل التحميل:", error);
         clear(ui.list);
         ui.list.append(el("p", { text: "تعذر تحميل الرسائل." }));
     }

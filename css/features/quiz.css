@@ -1,90 +1,158 @@
-#quiz { border-top: 1px solid #f5d5e2; }
+/* ============================================================
+   Quiz Section
+   ============================================================ */
 
-#quiz-container {
-    background-color: var(--white);
-    width: 100%;
-    max-width: 700px;
-    margin: 20px auto;
-    padding: 24px;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-}
-
-#quiz-container p { line-height: 1.7; overflow-wrap: anywhere; }
-
-#quiz-options {
+#quiz {
+    border-top: 1px solid #f5d5e2;
+    min-height: 60vh;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    margin: 20px 0;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 8% 80px;
 }
 
-#quiz-container .quiz-option {
-    display: block;
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid #edc4d4;
-    border-radius: var(--radius-sm);
-    background-color: #fff8fb;
-    color: var(--text);
-    text-align: right;
-    line-height: 1.6;
-    font-size: 16px;
-    font-weight: normal;
-    overflow-wrap: anywhere;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-}
+.quiz-launcher { text-align: center; }
 
-#quiz-container .quiz-option:hover:not(:disabled) {
-    background-color: var(--light-pink);
-    border-color: var(--pink);
-    transform: none;
-    box-shadow: none;
-}
-
-#quiz-container .quiz-option.is-correct {
-    background-color: #e8f5e9;
-    border-color: var(--ok);
-    color: var(--ok);
-    font-weight: bold;
-}
-
-#quiz-container .quiz-option.is-wrong {
-    background-color: #ffebee;
-    border-color: var(--error);
-    color: var(--error);
-    font-weight: bold;
-}
-
-#quiz-container .quiz-option:disabled {
-    opacity: 1;
-    cursor: default;
-}
-
-#answer-feedback { min-height: 1.5em; font-weight: bold; }
-
-@media (max-width: 600px) {
-    #quiz-container { padding: 16px; margin-top: 16px; border-radius: var(--radius-sm); }
-    #quiz-options { gap: 10px; margin: 16px 0; }
-    #quiz-container .quiz-option { padding: 11px 13px; font-size: 15px; }
-}
-#answer-explanation {
-    margin-top: 4px;
-    padding: 10px 14px;
-    background-color: #fff8fb;
-    border-right: 3px solid var(--pink);
-    border-radius: var(--radius-sm);
+.quiz-launcher-result {
+    margin-top: 18px;
+    min-height: 22px;
     color: var(--muted);
-    font-size: 15px;
-    line-height: 1.7;
+    font-size: 14px;
 }
+
+/* ============================================================
+   زر البدء
+   ============================================================ */
+
+.quiz-start-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    padding: 18px 36px;
+    border: none;
+    border-radius: 999px;
+
+    background: linear-gradient(135deg, #d94f83, #a92f61);
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 800;
+
+    box-shadow: 0 10px 28px rgba(169, 47, 97, 0.28);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: start-pulse 2.4s ease-in-out infinite;
+}
+
+.quiz-start-icon { width: 24px; height: 24px; flex-shrink: 0; }
+
+@media (hover: hover) {
+    .quiz-start-btn:hover { transform: translateY(-3px); animation-play-state: paused; }
+}
+
+.quiz-start-btn:active { transform: scale(0.97); }
+
+@keyframes start-pulse {
+    0%, 100% { box-shadow: 0 10px 28px rgba(169, 47, 97, 0.28), 0 0 0 0 rgba(217, 79, 131, 0.45); }
+    50%      { box-shadow: 0 10px 28px rgba(169, 47, 97, 0.28), 0 0 0 14px rgba(217, 79, 131, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .quiz-start-btn { animation: none; }
+}
+
+/* ============================================================
+   Modal
+   ============================================================ */
+
+.quiz-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 12px;
+}
+
+.quiz-modal.is-hidden { display: none; }
+
+.quiz-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(60, 20, 40, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.quiz-modal-panel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 560px;
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 52px 22px 22px;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: 0 24px 60px rgba(60, 20, 40, 0.35);
+}
+
+.quiz-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(217, 79, 131, 0.10);
+    color: var(--dark-pink);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.quiz-modal-close svg { width: 16px; height: 16px; }
+
+@media (hover: hover) {
+    .quiz-modal-close:hover { background: rgba(217, 79, 131, 0.22); }
+}
+
+.quiz-modal-close:active { transform: scale(0.92); }
+
+/* ============================================================
+   الحاوية
+   ============================================================ */
+
+#quiz-container { display: flex; flex-direction: column; }
+
+#quiz-container p {
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+    margin: 0;
+}
+
+/* ============================================================
+   شرائط
+   ============================================================ */
+
 .quiz-progress {
-    height: 6px;
+    height: 5px;
     background-color: #f5d5e2;
     border-radius: 3px;
     overflow: hidden;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
+    flex-shrink: 0;
 }
 
 .quiz-progress-bar {
@@ -92,4 +160,510 @@
     background-color: var(--pink);
     border-radius: 3px;
     transition: width 0.35s ease;
+}
+
+.quiz-timer {
+    height: 5px;
+    background-color: #fbeef4;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+}
+
+.quiz-timer-bar {
+    height: 100%;
+    width: 100%;
+    border-radius: 3px;
+    background-color: hsl(140, 55%, 72%);
+    transition: width 0.15s linear, background-color 0.25s linear;
+}
+
+.quiz-timer-bar.is-urgent { animation: timer-pulse 0.6s ease-in-out infinite; }
+
+@keyframes timer-pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.55; }
+}
+
+/* ============================================================
+   رأس السؤال
+   ============================================================ */
+
+.quiz-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    min-height: 22px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.quiz-counter { color: var(--muted); font-weight: 600; }
+
+.quiz-stats {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: auto;
+    font-weight: 800;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+}
+
+.stat-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.stat-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.stat-item.is-check { color: #2e7d32; }
+
+.stat-item.is-check .stat-icon {
+    width: 18px;
+    height: 18px;
+    stroke-width: 3.6;
+}
+
+.stat-item.is-flame { color: #a92f61; }
+
+.stat-item.is-flame .stat-icon {
+    width: 18px;
+    height: 18px;
+    animation-name: flame-flicker;
+    animation-duration: 1.4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes flame-flicker {
+    0%   { transform: scale(1)    rotate(-3deg); }
+    25%  { transform: scale(1.10) rotate(2deg); }
+    50%  { transform: scale(0.96) rotate(-2deg); }
+    75%  { transform: scale(1.08) rotate(3deg); }
+    100% { transform: scale(1)    rotate(-3deg); }
+}
+
+/* ============================================================
+   السؤال
+   ============================================================ */
+
+.quiz-question {
+    min-height: 54px;
+    font-size: 17px;
+    color: #742344;
+    font-weight: 600;
+    line-height: 1.7;
+    margin-bottom: 16px !important;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   الخيارات
+   ============================================================ */
+
+#quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 176px;
+    width: 100%;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+}
+
+#quiz-container .quiz-option {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 52px;
+    padding: 12px 16px;
+    border: 1px solid #edc4d4;
+    border-radius: var(--radius-sm);
+    background-color: #fff8fb;
+    color: var(--text);
+    text-align: right;
+    line-height: 1.5;
+    font-size: 15px;
+    font-weight: normal;
+    overflow-wrap: anywhere;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+@media (hover: hover) {
+    #quiz-container .quiz-option:hover:not(:disabled) {
+        background-color: var(--light-pink);
+        border-color: var(--pink);
+    }
+}
+
+#quiz-container .quiz-option.is-correct {
+    background-color: #e8f5e9;
+    border-color: var(--ok);
+    color: var(--ok);
+    font-weight: 700;
+}
+
+#quiz-container .quiz-option.is-wrong {
+    background-color: #ffebee;
+    border-color: var(--error);
+    color: var(--error);
+    font-weight: 700;
+}
+
+#quiz-container .quiz-option:disabled { opacity: 1; cursor: default; }
+
+/* ============================================================
+   التغذية الراجعة + القلب النابض
+   ============================================================ */
+
+.quiz-feedback-zone {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 90px;
+    margin-bottom: 14px;
+    flex-shrink: 0;
+}
+
+#answer-feedback {
+    min-height: 22px;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+/* إيموجي القلب النابض — يُستخدم فقط داخل اللعبة */
+@keyframes heart-pulse-anim {
+    0%, 100% { transform: scale(1); }
+    15%      { transform: scale(1.22); }
+    30%      { transform: scale(1); }
+    45%      { transform: scale(1.14); }
+    60%      { transform: scale(1); }
+}
+
+.heart-pulse {
+    display: inline-block;
+    animation-name: heart-pulse-anim;
+    animation-duration: 1.4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    transform-origin: center;
+    will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .heart-pulse { animation: none; }
+}
+
+/* ============================================================
+   بطاقة الشرح + المصباح
+   ============================================================ */
+
+.hint-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #fffbfd 0%, #fff6fa 100%);
+    border: 1px solid rgba(217, 79, 131, 0.10);
+    color: #5e3a4e;
+    font-size: 13.5px;
+    line-height: 1.75;
+    animation: hint-card-in 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes hint-card-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.hint-icon-wrap {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    margin-top: 1px;
+    color: #d94f83;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hint-icon {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.hint-bulb {
+    stroke-dasharray: 80;
+    stroke-dashoffset: 80;
+    animation-name: bulb-draw;
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: forwards;
+}
+
+@keyframes bulb-draw {
+    to { stroke-dashoffset: 0; }
+}
+
+.hint-ray {
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+
+    animation-name: ray-appear, ray-glow;
+    animation-duration: 0.22s, 1s;
+    animation-timing-function: ease-out, ease-in-out;
+    animation-fill-mode: forwards, none;
+    animation-iteration-count: 1, infinite;
+
+    animation-delay: var(--ray-delay, 0.45s), calc(var(--ray-delay, 0.45s) + 0.5s);
+}
+
+.hint-ray-1 { --ray-delay: 0.45s; }
+.hint-ray-2 { --ray-delay: 0.53s; }
+.hint-ray-3 { --ray-delay: 0.61s; }
+.hint-ray-4 { --ray-delay: 0.69s; }
+.hint-ray-5 { --ray-delay: 0.77s; }
+
+@keyframes ray-appear {
+    from { opacity: 0; transform: scale(0.4); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ray-glow {
+    0%, 35%   { opacity: 1;    transform: scale(1); }
+    50%, 85%  { opacity: 0.15; transform: scale(0.94); }
+    100%      { opacity: 1;    transform: scale(1); }
+}
+
+.hint-text { flex: 1; text-align: right; }
+
+@media (prefers-reduced-motion: reduce) {
+    .hint-card { animation: none; }
+    .hint-bulb { stroke-dasharray: none; stroke-dashoffset: 0; animation: none; }
+    .hint-ray  { opacity: 1; animation: none; }
+}
+
+/* ============================================================
+   أزرار الأكشن
+   ============================================================ */
+
+.quiz-actions {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+.quiz-actions button {
+    min-height: 44px;
+    padding: 10px 22px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#restart-quiz {
+    background-color: transparent;
+    color: var(--dark-pink);
+    border: 2px solid var(--pink);
+    border-radius: 25px;
+}
+
+@media (hover: hover) {
+    #restart-quiz:hover {
+        background-color: var(--light-pink);
+        color: var(--dark-pink);
+    }
+}
+
+#next-question { min-width: 160px; }
+#next-question:disabled { opacity: 0.5; }
+
+/* ============================================================
+   النتيجة النهائية
+   ============================================================ */
+
+.quiz-finish {
+    text-align: center;
+    padding: 24px 8px 12px;
+    animation: finish-in 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes finish-in {
+    from { opacity: 0; transform: scale(0.94); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.trophy-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    margin-bottom: 8px;
+    border-radius: 50%;
+    color: #a92f61;
+    background: linear-gradient(135deg, #fff0f5, #ffe0eb);
+    box-shadow: 0 8px 20px rgba(169, 47, 97, 0.15);
+}
+
+.trophy-icon { width: 38px; height: 38px; }
+
+.quiz-finish.is-perfect .trophy-wrap {
+    background: linear-gradient(135deg, #ffd97a, #d9a34a);
+    color: #5c3a10;
+    animation: trophy-glow 1.6s ease-in-out infinite;
+}
+
+@keyframes trophy-glow {
+    0%, 100% { box-shadow: 0 8px 20px rgba(169, 47, 97, 0.15), 0 0 0 0 rgba(217, 163, 74, 0.5); }
+    50%      { box-shadow: 0 8px 20px rgba(169, 47, 97, 0.15), 0 0 0 12px rgba(217, 163, 74, 0); }
+}
+
+.quiz-finish.is-great .trophy-wrap {
+    color: #d94f83;
+    background: linear-gradient(135deg, #ffe0eb, #ffc3df);
+}
+
+.quiz-finish.is-good .trophy-wrap {
+    color: #b26a00;
+    background: linear-gradient(135deg, #fff7e6, #ffe6b0);
+}
+
+.quiz-finish.is-start .trophy-wrap {
+    color: #a92f61;
+    background: linear-gradient(135deg, #fff0f5, #f8c6da);
+}
+
+.quiz-finish-title {
+    color: var(--dark-pink);
+    font-size: 22px;
+    margin: 6px 0 8px;
+}
+
+.quiz-finish-message {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 320px;
+    margin: 0 auto 14px;
+}
+
+.quiz-finish-score {
+    color: var(--dark-pink);
+    font-size: 17px;
+    margin: 8px 0;
+}
+
+.quiz-finish-score strong { font-size: 22px; }
+
+.quiz-finish-status {
+    color: var(--muted);
+    font-size: 13px;
+    min-height: 20px;
+    margin: 8px 0 0;
+}
+
+.quiz-finish-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.quiz-finish-actions button {
+    min-height: 44px;
+    min-width: 160px;
+}
+
+#restart-finish {
+    background-color: transparent;
+    color: var(--dark-pink);
+    border: 2px solid var(--pink);
+    border-radius: 25px;
+}
+
+/* ============================================================
+   Confetti
+   ============================================================ */
+
+.confetti-piece {
+    position: fixed;
+    top: -20px;
+    z-index: 1000;
+    border-radius: 2px;
+    pointer-events: none;
+    opacity: 0.95;
+    animation-name: confetti-fall;
+    animation-timing-function: cubic-bezier(0.4, 0.0, 0.6, 1.0);
+    animation-fill-mode: forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(105vh) rotate(var(--spin, 360deg));
+        opacity: 0.4;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .confetti-piece { display: none; }
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 600px) {
+    #quiz { padding: 40px 5% 60px; }
+    .quiz-modal { padding: 10px 6px; }
+    .quiz-modal-panel { padding: 46px 16px 16px; border-radius: var(--radius-sm); }
+    .quiz-modal-close { top: 8px; right: 8px; width: 32px; height: 32px; }
+
+    .quiz-question { font-size: 16px; min-height: 48px; }
+    #quiz-options { min-height: 160px; gap: 8px; }
+
+    #quiz-container .quiz-option {
+        min-height: 48px;
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    .quiz-feedback-zone { min-height: 82px; }
+    .hint-card { padding: 12px 14px; font-size: 12.5px; gap: 10px; }
+    .hint-icon-wrap { width: 22px; height: 22px; }
+
+    .quiz-start-btn { padding: 16px 28px; font-size: 16px; }
+
+    .quiz-actions { gap: 8px; }
+    .quiz-actions button { flex: 1; min-width: 0; padding: 10px 12px; font-size: 14px; }
+
+    .quiz-finish-actions { flex-direction: column; }
+    .quiz-finish-actions button { width: 100%; }
+    .trophy-wrap { width: 64px; height: 64px; }
+    .trophy-icon { width: 32px; height: 32px; }
 }

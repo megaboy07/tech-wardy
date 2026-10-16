@@ -5,7 +5,6 @@
 import { $, setText } from "../core/dom.js";
 import { APP } from "../config.js";
 
-const TAG = "[techwardi:share]";
 const ui = {};
 let statusTimer = null;
 
@@ -15,14 +14,12 @@ export function initShare() {
     ui.status = $("#share-status");
 
     if (!ui.shareBtn || !ui.status) {
-        console.warn(`${TAG} عناصر DOM ناقصة`);
+        console.warn("[share] عناصر DOM ناقصة");
         return;
     }
 
     ui.shareBtn.addEventListener("click", nativeShare);
     if (ui.copyBtn) ui.copyBtn.addEventListener("click", copyLink);
-
-    console.info(`${TAG} جاهزة`);
 }
 
 async function nativeShare() {
@@ -37,12 +34,11 @@ async function nativeShare() {
             await navigator.share(data);
             setStatus("تمت المشاركة 💗");
         } else {
-            // لا يوجد Web Share — نتحوّل إلى النسخ
             await copyLink();
         }
     } catch (error) {
         if (error && error.name === "AbortError") return;
-        console.warn(`${TAG} فشلت المشاركة:`, error);
+        console.warn("[share] فشلت المشاركة:", error);
         setStatus("تعذرت المشاركة تلقائيًا.");
     }
 }
@@ -54,7 +50,6 @@ async function copyLink() {
         if (navigator.clipboard && window.isSecureContext) {
             await navigator.clipboard.writeText(url);
         } else {
-            // بديل قديم لمتصفحات لا تدعم Clipboard API
             const ta = document.createElement("textarea");
             ta.value = url;
             ta.setAttribute("readonly", "");
@@ -67,7 +62,7 @@ async function copyLink() {
         }
         setStatus("تم نسخ الرابط ✓");
     } catch (error) {
-        console.warn(`${TAG} فشل النسخ:`, error);
+        console.warn("[share] فشل النسخ:", error);
         setStatus("انسخ الرابط يدويًا: " + url);
     }
 }

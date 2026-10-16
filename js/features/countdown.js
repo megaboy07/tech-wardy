@@ -5,7 +5,6 @@
 import { $, setText } from "../core/dom.js";
 import { APP } from "../config.js";
 
-const TAG = "[techwardi:countdown]";
 const ui = {};
 let timerId = null;
 
@@ -20,12 +19,12 @@ export function initCountdown() {
     ui.status = $("#countdown-status");
 
     if (!ui.days || !ui.hours || !ui.minutes || !ui.seconds) {
-        console.warn(`${TAG} عناصر DOM ناقصة`);
+        console.warn("[countdown] عناصر DOM ناقصة");
         return;
     }
 
     if (Number.isNaN(TARGET_MS)) {
-        console.error(`${TAG} eventDate غير صالح في config.js:`, APP.eventDate);
+        console.error("[countdown] eventDate غير صالح:", APP.eventDate);
         setText(ui.status, "تاريخ الفعالية غير محدد.");
         return;
     }
@@ -34,8 +33,6 @@ export function initCountdown() {
     timerId = setInterval(tick, 1000);
 
     document.addEventListener("visibilitychange", onVisibility);
-
-    console.info(`${TAG} جاهزة — الهدف: ${new Date(TARGET_MS).toLocaleString("ar")}`);
 }
 
 function onVisibility() {
