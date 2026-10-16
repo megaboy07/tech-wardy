@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>حائط الأمل | تِك وردي</title>
+    <meta name="description" content="شارك رسالة دعم وأمل لمن يمر برحلة العلاج.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="حائط الأمل | تِك وردي">
+    <meta property="og:description" content="شارك كلمة دعم — كل كلمة قد تمنح قلبًا قوة.">
+    <meta property="og:locale" content="ar_SD">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" content="#d94f83">
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/features/hope-wall.css">
+    <link rel="stylesheet" href="css/utilities.css">
+</head>
+
+<body data-page="wall">
+
+    <header class="site-header">
+        <nav class="navbar" aria-label="القائمة الرئيسية">
+            <a href="index.html" class="logo">تِك وردي 💗</a>
+
+            <button class="menu-toggle" type="button"
+                    aria-label="فتح القائمة" aria-expanded="false"
+                    aria-controls="main-navigation">
+                <span></span><span></span><span></span>
+            </button>
+
+            <ul class="nav-links" id="main-navigation">
+                <li><a href="index.html" data-nav="home">الرئيسية</a></li>
+                <li><a href="wall.html" data-nav="wall">حائط الأمل</a></li>
+                <li><a href="quiz.html" data-nav="quiz">تحدي الوعي</a></li>
+                <li><a href="learn.html" data-nav="learn">اعرف أكثر</a></li>
+                <li><a href="videos.html" data-nav="videos">فيديوهات</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <header class="page-header">
+            <h1>حائط الأمل 💗</h1>
+            <p>شارك رسالة دعم أو كلمة تشجيع. ستظهر بعد مراجعتها والموافقة عليها.</p>
+        </header>
+
+        <section id="wall">
+            <form id="message-form">
+                <label for="message">رسالتك</label>
+
+                <textarea
+                    id="message"
+                    name="message"
+                    placeholder="اكتب رسالة أمل..."
+                    required
+                    maxlength="500"
+                ></textarea>
+
+                <button type="submit">إرسال الرسالة</button>
+            </form>
+
+            <div id="messages-list"></div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p class="footer-tagline">تِك وردي 💗 — معًا لنشر الوعي والأمل.</p>
+        <p class="footer-copy" id="footer-year"></p>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+
+</body>
+</html>
