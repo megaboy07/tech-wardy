@@ -1,27 +1,10 @@
 /**
  * dom.js — أدوات DOM صغيرة.
- * el() هي البديل الآمن لـ innerHTML عند بناء عناصر من بيانات المستخدم.
  */
 
 export const $ = (selector, root = document) =>
     root.querySelector(selector);
 
-export const $$ = (selector, root = document) =>
-    Array.from(root.querySelectorAll(selector));
-
-export function requireEl(selector, root = document) {
-    const node = $(selector, root);
-    if (!node) {
-        console.error(`[techwardi:dom] عنصر مطلوب غير موجود: ${selector}`);
-        throw new Error(`Missing element: ${selector}`);
-    }
-    return node;
-}
-
-/**
- * ينشئ عنصرًا بسمات وأبناء.
- * مفاتيح خاصة: class/className, text, dataset, style, onClick…
- */
 export function el(tag, attrs = {}, children = []) {
     const node = document.createElement(tag);
 
@@ -58,18 +41,4 @@ export function clear(node) {
 
 export function setText(node, text) {
     node.textContent = String(text);
-}
-
-export function setHidden(node, hidden) {
-    node.hidden = Boolean(hidden);
-}
-
-// تفويض حدث على حاوية — للقوائم المتغيرة
-export function delegate(root, eventName, selector, handler) {
-    root.addEventListener(eventName, (event) => {
-        const match = event.target.closest(selector);
-        if (match && root.contains(match)) {
-            handler.call(match, event, match);
-        }
-    });
 }
